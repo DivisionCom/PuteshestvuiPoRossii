@@ -1,0 +1,49 @@
+﻿<Page x:Class="PuteshestvuiPoRossii.Pages.PageHotelAdd"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PuteshestvuiPoRossii.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Добавление отеля">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Название отеля: "
+                           Style="{StaticResource mainTblock}"/>
+                <TextBox x:Name="tboxHotelName"
+                         Style="{StaticResource mainTbox}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Количество звезд: "
+                           Style="{StaticResource mainTblock}"/>
+                <TextBox x:Name="tboxHotelStars"
+                         Style="{StaticResource mainTbox}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Описание отеля: "
+                           Style="{StaticResource mainTblock}"/>
+                <TextBox x:Name="tboxHotelDescription"
+                         Style="{StaticResource mainTbox}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Страна: "
+                           Style="{StaticResource mainTblock}"/>
+                <ComboBox x:Name="cmbHotelCountry"
+                          Style="{StaticResource mainCBox}"
+                          DisplayMemberPath="Name"
+                          />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Name="btnHotelAdd"
+                        Content="Добавить"
+                        Style="{StaticResource btnMain}" Click="btnHotelAdd_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

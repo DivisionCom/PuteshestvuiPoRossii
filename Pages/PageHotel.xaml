@@ -10,10 +10,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="DataGridHotel" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*" FontFamily="Comic Sans MS">
+        <DataGrid Grid.Row="0" x:Name="DataGridHotel" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*" FontSize="14" FontFamily="Comic Sans MS">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название отеля" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Количество звезд" Binding="{Binding CountOfStars}"/>
@@ -24,17 +25,28 @@
                         <DataTemplate>
                             <Button Name="btnEditHotelInfo"
                                     Content="Редактировать"
-                                    Click="btnEditHotelInfo_Click"/>
+                                    Click="btnEditHotelInfo_Click"
+                                    Foreground="#ffffff"
+                                    Background="#e31e24"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button x:Name="btnHotelAdd"
+                    Style="{StaticResource btnMain}"
+                    Content="Добавить" Click="btnHotelAdd_Click"/>
+            <Button x:Name="btnHotelDelete"
+                    Style="{StaticResource btnMain}"
+                    Content="Удалить" Click="btnHotelDelete_Click"/>
+        </StackPanel>
+        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel x:Name="PaginationPanel" Orientation="Horizontal">
                 <Button Name="btnGoFirstPage" Content="&lt;&lt;" Style="{StaticResource btnPagination}" Click="btnGoFirstPage_Click"/>
                 <Button Name="btnGoBackPage" Content="&lt;" Style="{StaticResource btnPagination}" Click="btnGoBackPage_Click"/>
-                <TextBox Name="tboxPageNumber" Width="25" Height="25"/>
                 <TextBlock Name="tblockPageCount" Text="" Width="50" Height="25"/>
                 <Button Name="btnGoForwardPage" Content=">" Style="{StaticResource btnPagination}" Click="btnGoForwardPage_Click"/>
                 <Button Name="btnGoLastPage" Content=">>" Style="{StaticResource btnPagination}" Click="btnGoLastPage_Click"/>

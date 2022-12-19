@@ -115,6 +115,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PageHotelAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageHotelEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +135,12 @@
   <ItemGroup>
     <Compile Include="Pages\PageHotel.xaml.cs">
       <DependentUpon>PageHotel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageHotelAdd.xaml.cs">
+      <DependentUpon>PageHotelAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageHotelEdit.xaml.cs">
+      <DependentUpon>PageHotelEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageMenu.xaml.cs">
       <DependentUpon>PageMenu.xaml</DependentUpon>

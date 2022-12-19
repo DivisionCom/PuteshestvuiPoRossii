@@ -35,38 +35,67 @@ namespace PuteshestvuiPoRossii.Pages
         public void RefreshHotels()
         {
             DataGridHotel.ItemsSource = ConnectOdb.conObj.Hotel.OrderBy(h => h.Name).ToList();
-            _maxPage = ConnectOdb.conObj.Hotel.OrderBy(h => h.Name).ToList().Count / 10;
+            _maxPage = (int)Math.Ceiling(ConnectOdb.conObj.Hotel.OrderBy(h => h.Name).ToList().Count * 1.0 / 10);
 
             var listHotels = ConnectOdb.conObj.Hotel.OrderBy(h => h.Name).ToList().Skip((_currentPage - 1) * 10).Take(10).ToList();
 
-            tblockPageCount.Text = " из " + _maxPage.ToString();
-            tboxPageNumber.Text = _currentPage.ToString();
+            tblockPageCount.Text = _currentPage.ToString() + " из " + _maxPage.ToString();
             DataGridHotel.ItemsSource = listHotels;
         }
 
         private void btnEditHotelInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameObj.frameMain.Navigate(new PageHotelEdit(sender ,this));
         }
 
         private void btnGoFirstPage_Click(object sender, RoutedEventArgs e)
         {
-
+            _currentPage = 1;
+            RefreshHotels();
         }
 
         private void btnGoBackPage_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_currentPage > 1)
+                _currentPage--;
+            else
+                return;
+            RefreshHotels();
         }
 
         private void btnGoForwardPage_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_currentPage < _maxPage)
+                _currentPage++;
+            else
+                return;
+            RefreshHotels();
         }
 
         private void btnGoLastPage_Click(object sender, RoutedEventArgs e)
         {
+            _currentPage = _maxPage;
+            RefreshHotels();
+        }
 
+        private void btnHotelDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите удалить выбранный отель?" + _hotel.Name,
+                "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+
+                var hotelObj = DataGridHotel.SelectedItems.Cast<Hotel>().ToList();
+                ConnectOdb.conObj.Hotel.RemoveRange(hotelObj);
+                ConnectOdb.conObj.SaveChanges();
+
+                RefreshHotels();
+                MessageBox.Show("Данные успешно удалены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void btnHotelAdd_Click(object sender, RoutedEventArgs e)
+        {
+            FrameObj.frameMain.Navigate(new PageHotelAdd(this));
         }
     }
 }
