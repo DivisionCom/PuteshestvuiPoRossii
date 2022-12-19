@@ -1,0 +1,101 @@
+﻿<Page x:Class="PuteshestvuiPoRossii.Pages.PageTours"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PuteshestvuiPoRossii.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="Туры">
+    <Page.Resources>
+        <sys:String x:Key="NullImage">
+            pack://application:,,,/Resources/picture.png
+        </sys:String>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Введите текст для поиска:"
+                           Style="{StaticResource mainTblock}"
+                           TextAlignment="Center"/>
+                <TextBox Name="tboxFind" Style="{StaticResource mainTbox}" TextChanged="tboxFind_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Выберите тип поиска:"
+                           Style="{StaticResource mainTblock}"
+                           TextAlignment="Center"/>
+                <ComboBox Name="CmbTypes"
+                          Style="{StaticResource mainCBox}"
+                          Text="Все типы" IsEditable="True" IsReadOnly="True"
+                          DisplayMemberPath="Name" SelectionChanged="CmbTypes_SelectionChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <CheckBox x:Name="ChbActual"
+                          Content="Только актуальные туры"
+                          Style="{StaticResource mainChBox}"
+                          Checked="ChbActual_Checked"
+                          Unchecked="ChbActual_Unchecked"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="1"
+                  x:Name="listTours"
+                  Width="900"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel>
+
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1"
+                            BorderBrush="Black">
+                        <Grid Width="200"
+                                  Height="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="5*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                           Text="{Binding Name}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            <Image Grid.Row="1"
+                                       Source="{Binding ImgPath, FallbackValue={StaticResource NullImage}}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="2"
+                                           Text="{Binding FullPriceView}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            <UniformGrid Grid.Row="3"
+                                             Rows="1" Columns="2">
+                                <TextBlock Text="{Binding Status}" Foreground="{Binding colorBrush}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FullTicketCount}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                            </UniformGrid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
